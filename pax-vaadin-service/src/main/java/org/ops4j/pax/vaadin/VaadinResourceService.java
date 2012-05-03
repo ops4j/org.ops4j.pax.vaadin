@@ -1,4 +1,4 @@
-package org.pax.vaadin;
+package org.ops4j.pax.vaadin;
 
 import org.osgi.framework.Bundle;
 

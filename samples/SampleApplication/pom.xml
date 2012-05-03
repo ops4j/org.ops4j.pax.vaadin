@@ -10,7 +10,6 @@
     <groupId>org.ops4j.pax.vaadin.samples</groupId>
     <artifactId>SampleApplication</artifactId>
     <packaging>bundle</packaging>
-    <version>0.1.0-SNAPSHOT</version>
     <name>Vaadin Web Application</name>
 
     <properties>
@@ -20,6 +19,18 @@
     </properties>
 
     <build>
+    	<resources>
+    		<resource>
+    			<directory>${project.build.directory}/resources</directory>
+    			<excludes>
+    				<exclude>WEB-INF</exclude>
+    			</excludes>
+    		</resource>
+    		<resource>
+    			<directory>src/main/resources</directory>
+    		</resource>
+    	</resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -35,23 +46,23 @@
             </plugin>
 
             <!-- Compiles your custom GWT components with the GWT compiler -->
-            <!-- A hosted mode browser for client-side widget debugging can 
-                be run with the goal gwt:run after uncommenting the correct line below. A 
-                remote debugger can then be connected to port 8998. Note that e.g. a Jetty 
-                server should be running with the server side parts - use the goal jetty:run 
+            <!-- A hosted mode browser for client-side widget debugging can
+                be run with the goal gwt:run after uncommenting the correct line below. A
+                remote debugger can then be connected to port 8998. Note that e.g. a Jetty
+                server should be running with the server side parts - use the goal jetty:run
                 . -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>${gwt.plugin.version}</version>
                 <configuration>
-                    <!-- if you don't specify any modules, the plugin will 
+                    <!-- if you don't specify any modules, the plugin will
                         find them -->
-                    <!-- <modules> <module>org.ops4j.pax.vaadin.samples.gwt.ColorPickerWidgetSet</module> 
+                    <!-- <modules> <module>org.ops4j.pax.vaadin.samples.gwt.ColorPickerWidgetSet</module>
                         </modules> -->
-                    <webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
+                    <webappDirectory>${project.build.directory}/resources/VAADIN/widgetsets</webappDirectory>
                     <!-- On Mac running Snow Leopard, add "-d32" -->
-                    <!-- This causes error messages (but build works) in 
+                    <!-- This causes error messages (but build works) in
                         phase "package": two processes would use the same debug port -->
                     <!--extraJvmArgs>-Xmx512M -Xss1024k -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998</extraJvmArgs -->
                     <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
@@ -63,6 +74,7 @@
                 </configuration>
                 <executions>
                     <execution>
+                    	<phase>generate-resources</phase>
                         <goals>
                             <goal>resources</goal>
                             <goal>compile</goal>
@@ -141,7 +153,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
         </dependency>
-        <!-- This is also used by gwt-maven-plugin to deduce GWT version 
+        <!-- This is also used by gwt-maven-plugin to deduce GWT version
             number. -->
         <dependency>
             <groupId>com.google.gwt</groupId>

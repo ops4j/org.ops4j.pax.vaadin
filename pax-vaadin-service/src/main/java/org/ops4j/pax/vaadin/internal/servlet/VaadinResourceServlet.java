@@ -1,4 +1,4 @@
-package org.pax.vaadin.internal.servlet;
+package org.ops4j.pax.vaadin.internal.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ops4j.pax.vaadin.VaadinResourceService;
 import org.osgi.framework.Bundle;
-import org.pax.vaadin.VaadinResourceService;
 
 public class VaadinResourceServlet extends HttpServlet implements VaadinResourceService {
 

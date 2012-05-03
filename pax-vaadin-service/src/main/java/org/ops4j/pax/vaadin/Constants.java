@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.pax.vaadin;
+package org.ops4j.pax.vaadin;
 
 /**
  * @author achim
