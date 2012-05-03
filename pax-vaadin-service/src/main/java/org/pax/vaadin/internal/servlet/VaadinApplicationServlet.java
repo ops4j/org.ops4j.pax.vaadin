@@ -26,5 +26,5 @@ public class VaadinApplicationServlet extends AbstractApplicationServlet {
 			throws ClassNotFoundException {
 		return application.getClass();
 	}
-
+	
 }

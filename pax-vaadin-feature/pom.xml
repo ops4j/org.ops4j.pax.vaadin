@@ -21,6 +21,11 @@
             <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.vaadin.samples</groupId>
+            <artifactId>SampleApplication</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

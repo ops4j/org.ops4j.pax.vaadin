@@ -14,5 +14,6 @@
   <modules>
       <module>SimpleApplication</module>
       <module>SimpleTheme</module>
+    <module>SampleApplication</module>
   </modules>
 </project>
