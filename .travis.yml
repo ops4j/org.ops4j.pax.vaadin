@@ -1,0 +1,6 @@
+language: java
+script: mvn
+notifications:
+  email:
+      - ops4j-notify@googlegroups.com
+
