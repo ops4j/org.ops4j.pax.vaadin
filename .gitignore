@@ -13,4 +13,9 @@ results
 
 node_modules
 npm-debug.log
-/.settings
+
+*target
+*.classpath
+*.project
+*.settings
+
