@@ -22,9 +22,6 @@
     	<resources>
     		<resource>
     			<directory>${project.build.directory}/resources</directory>
-    			<excludes>
-    				<exclude>WEB-INF</exclude>
-    			</excludes>
     		</resource>
     		<resource>
     			<directory>src/main/resources</directory>

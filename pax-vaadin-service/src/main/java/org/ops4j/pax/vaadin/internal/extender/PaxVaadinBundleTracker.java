@@ -2,6 +2,7 @@ package org.ops4j.pax.vaadin.internal.extender;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -91,7 +92,8 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 				props.put(ALIAS, alias);
 
 				if (widgetset != null) {
-					props.put("init.Widgetset", widgetset);
+					props.put("init-prefix", "init.");
+					props.put("init.widgetset", widgetset);
 				}
 
 				ServiceRegistration registeredServlet = bundle
@@ -118,12 +120,12 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 	}
 
 	protected String findWidgetset(Bundle bundle) {
-		// Enumeration widgetEntries = bundle.findEntries(".", "*.gwt.xml",
-		// true);
-		Enumeration widgetEntries = bundle.getEntryPaths(VAADIN_PATH);
+		Enumeration widgetEntries = bundle.findEntries("", "*.gwt.xml", true);
+//		Enumeration widgetEntries = bundle.getEntryPaths(VAADIN_PATH);
 		if (widgetEntries == null || !widgetEntries.hasMoreElements())
 			return null;
 
+		/*
 		while (widgetEntries.hasMoreElements()) {
 
 			String path = (String) widgetEntries.nextElement();
@@ -142,7 +144,12 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 				}
 			}
 		}
-		return null;
+		*/
+		URL widgetUrl = (URL) widgetEntries.nextElement();
+		String path = widgetUrl.getPath();
+		path = path.substring(1,path.length()-8);
+		path.replace("/", ".");
+		return path;
 	}
 
 	@Override
