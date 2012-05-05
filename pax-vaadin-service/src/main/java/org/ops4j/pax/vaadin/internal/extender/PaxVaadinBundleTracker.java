@@ -148,7 +148,7 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 		URL widgetUrl = (URL) widgetEntries.nextElement();
 		String path = widgetUrl.getPath();
 		path = path.substring(1,path.length()-8);
-		path.replace("/", ".");
+		path = path.replace("/", ".");
 		return path;
 	}
 
