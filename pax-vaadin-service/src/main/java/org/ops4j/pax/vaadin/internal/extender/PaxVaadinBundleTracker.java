@@ -85,8 +85,7 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 			final String widgetset = findWidgetset(bundle);
 
 			if (application != null) {
-				VaadinApplicationServlet servlet = new VaadinApplicationServlet(
-						application);
+				VaadinApplicationServlet servlet = new VaadinApplicationServlet(application);
 
 				Map<String, Object> props = new Hashtable<String, Object>();
 				props.put(ALIAS, alias);

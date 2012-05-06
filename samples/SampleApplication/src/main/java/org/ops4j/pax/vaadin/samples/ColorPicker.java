@@ -18,7 +18,7 @@ package org.ops4j.pax.vaadin.samples;
 
 import java.util.Map;
 
-import org.ops4j.pax.vaadin.samples.gwt.client.ui.VColorPicker;
+import org.ops4j.pax.vaadin.samples.widgetset.client.ui.VColorPicker;
 
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
