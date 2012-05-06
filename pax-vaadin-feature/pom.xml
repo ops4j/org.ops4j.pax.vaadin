@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.vaadin.samples</groupId>
-            <artifactId>SampleApplication</artifactId>
+            <artifactId>ColorPicker</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -42,6 +42,8 @@
                         </goals>
                         <configuration>
                             <karafVersion>2.2.7</karafVersion>
+                            <addTransitiveFeatures>true</addTransitiveFeatures>
+                            <includeDependencies>true</includeDependencies>
                         </configuration>
                     </execution>
                 </executions>
