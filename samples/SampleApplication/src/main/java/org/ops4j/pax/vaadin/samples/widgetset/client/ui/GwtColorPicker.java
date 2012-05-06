@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.ops4j.pax.vaadin.samples.gwt.client.ui;
+package org.ops4j.pax.vaadin.samples.widgetset.client.ui;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
