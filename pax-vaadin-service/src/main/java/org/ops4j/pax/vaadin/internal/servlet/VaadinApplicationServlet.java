@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ops4j.pax.swissbox.core.ContextClassLoaderUtils;
+import org.osgi.framework.Bundle;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
+import com.vaadin.terminal.gwt.server.ApplicationServlet;
 
 public class VaadinApplicationServlet extends HttpServlet {
 
