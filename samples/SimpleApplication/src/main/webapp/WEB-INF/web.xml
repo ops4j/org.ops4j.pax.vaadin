@@ -12,11 +12,7 @@
         <init-param>
             <description>Vaadin application class to start</description>
             <param-name>application</param-name>
-            <param-value>org.ops4j.pax.vaadin.samples.ColorPickerApplication</param-value>
-        </init-param>
-        <init-param>
-            <param-name>widgetset</param-name>
-            <param-value>org.ops4j.pax.vaadin.samples.gwt.ColorPickerWidgetSet</param-value>
+            <param-value>org.pax.vaadin.samples.simple.app.MyVaadinApplication</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
