@@ -14,8 +14,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gwt.version>2.4.0_1</gwt.version>
-		<gwt.plugin.version>2.2.0</gwt.plugin.version>
+		<gwt.version>2.4.0</gwt.version>
+		<gwt.plugin.version>2.4.0</gwt.plugin.version>
 	</properties>
 
 	<build>
@@ -69,7 +69,6 @@
 				</configuration>
 				<executions>
 					<execution>
-						<phase>generate-resources</phase>
 						<goals>
 							<goal>resources</goal>
 							<goal>compile</goal>
@@ -78,8 +77,8 @@
 				</executions>
 				<dependencies>
 					<dependency>
-						<groupId>org.apache.servicemix.bundles</groupId>
-						<artifactId>org.apache.servicemix.bundles.gwt-dev</artifactId>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-dev</artifactId>
 						<version>${gwt.version}</version>
 					</dependency>
 					<dependency>
@@ -150,10 +149,11 @@
 		</dependency>
 		<!-- This is also used by gwt-maven-plugin to deduce GWT version number. -->
 		<dependency>
-			<groupId>org.apache.servicemix.bundles</groupId>
-			<artifactId>org.apache.servicemix.bundles.gwt-user</artifactId>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
 			<version>${gwt.version}</version>
 			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
