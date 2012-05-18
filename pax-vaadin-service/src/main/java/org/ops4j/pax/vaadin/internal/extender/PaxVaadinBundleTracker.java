@@ -108,8 +108,7 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 				props.put(ALIAS, alias);
 
 				if (widgetset != null) {
-					props.put("init-prefix", "init.");
-					props.put("init.widgetset", widgetset);
+					props.put("widgetset", widgetset);
 				}
 
 				ServiceRegistration registeredServlet = bundle
