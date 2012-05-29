@@ -44,7 +44,7 @@ import com.vaadin.Application;
 
 public class PaxVaadinBundleTracker extends BundleTracker {
 
-	private static final String ALIAS = "alias";
+	public static final String ALIAS = "alias";
 
 	private static final String VAADIN_PATH = "/VAADIN";
 

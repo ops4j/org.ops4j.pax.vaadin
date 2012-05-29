@@ -24,6 +24,7 @@ import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
 
 import org.ops4j.pax.vaadin.VaadinResourceService;
+import org.ops4j.pax.vaadin.internal.extender.ApplicationFactoryServiceTracker;
 import org.ops4j.pax.vaadin.internal.extender.PaxVaadinBundleTracker;
 import org.ops4j.pax.vaadin.internal.servlet.VaadinResourceServlet;
 import org.osgi.framework.Bundle;
@@ -40,20 +41,26 @@ public class Activator implements BundleActivator {
 	private BundleContext bundleContext;
 	private PaxVaadinBundleTracker bundleTracker;
 	private ServiceRegistration resourceService;
+    private ApplicationFactoryServiceTracker serviceTracker;
 
 	public void start(BundleContext context) throws Exception {
 		bundleContext = context;
 		createAndRegisterVaadinResourceServlet();
 
 		bundleTracker = new PaxVaadinBundleTracker(bundleContext);
+		serviceTracker = new ApplicationFactoryServiceTracker(bundleContext);
 
 		bundleTracker.open();
+		serviceTracker.open();
 
 	}
 
 	public void stop(BundleContext context) throws Exception {
 		if (bundleTracker != null)
 			bundleTracker.close();
+		
+		if (serviceTracker != null)
+		    serviceTracker.close();
 
 		if (resourceService != null)
 			resourceService.unregister();
