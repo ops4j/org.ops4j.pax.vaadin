@@ -25,4 +25,10 @@ public interface Constants {
 
 	public static final String VAADIN_APPLICATION = "Vaadin-Application";
 
+	public static final String VAADIN_ALIAS = "Vaadin-Alias";
+
+	public static final String VAADIN_PATH = "/VAADIN";
+
+	public static final String ALIAS = "alias";
+
 }

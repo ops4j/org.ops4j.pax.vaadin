@@ -37,12 +37,11 @@ public class ApplicationFactoryServiceTracker extends ServiceTracker {
         FactoryServlet servlet = new FactoryServlet(factory);
         Dictionary props = new Properties();
         
-        
         for(String key : reference.getPropertyKeys()) {
             props.put(key, reference.getProperty(key));
         }
         
-        if(props.get(PaxVaadinBundleTracker.ALIAS) == null) {
+        if(props.get(org.ops4j.pax.vaadin.Constants.ALIAS) == null) {
             logger.warn("You have not set the alias property for ApplicationFactory: " + factory);
         }
         m_serviceRegistration.put(factory, context.registerService(Servlet.class.getName(), servlet, props));
@@ -67,7 +66,9 @@ public class ApplicationFactoryServiceTracker extends ServiceTracker {
     
     private class FactoryServlet extends AbstractApplicationServlet{
         
-        private ApplicationFactory m_factory;
+		private static final long serialVersionUID = 1L;
+		
+		private ApplicationFactory m_factory;
 
         public FactoryServlet(ApplicationFactory factory) {
             m_factory = factory;

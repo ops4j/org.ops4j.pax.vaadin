@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,16 +34,13 @@ import org.osgi.framework.Bundle;
 
 public class VaadinResourceServlet extends HttpServlet implements VaadinResourceService {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String _VAADIN = "/VAADIN";
-
 	private final Bundle vaadin;
-
-	private final List<Bundle> resourceBundles = new ArrayList<Bundle>();
+	
+	private final Map<Bundle, Integer> resourceBundles = new HashMap<Bundle, Integer>();
+	
+	private final Integer resourceBundleCountMin = 1;
 
 	public VaadinResourceServlet(Bundle vaadin) {
 		this.vaadin = vaadin;
@@ -54,7 +51,7 @@ public class VaadinResourceServlet extends HttpServlet implements VaadinResource
 			HttpServletResponse resp) throws ServletException,
 			IOException {
 		String path = req.getPathInfo();
-		String resourcePath = _VAADIN + path;
+		String resourcePath = org.ops4j.pax.vaadin.Constants.VAADIN_PATH + path;
 
 		URL resourceUrl = vaadin.getResource(resourcePath);
 
@@ -78,7 +75,7 @@ public class VaadinResourceServlet extends HttpServlet implements VaadinResource
 	}
 
 	private URL loadFromResources(String resourcePath) {
-		for (Bundle resourceBundle : resourceBundles) {
+		for (Bundle resourceBundle : resourceBundles.keySet()) {
 			URL resourceUrl = resourceBundle.getResource(resourcePath);
 			if (null != resourceUrl)
 				return resourceUrl;
@@ -86,14 +83,37 @@ public class VaadinResourceServlet extends HttpServlet implements VaadinResource
 		return null;
 	}
 
+	private Integer getReferencesCount(Bundle bundle) {
+		Integer value = resourceBundles.get(bundle);
+		return value;
+	}
+
 	@Override
 	public void addResources(Bundle bundle) {
-		resourceBundles.add(bundle);
+		if (bundle == null)
+			return;
+		
+		if (resourceBundles.keySet().contains(bundle)) {
+			Integer value = getReferencesCount(bundle);		
+			resourceBundles.put(bundle, value++); 
+		} else {	
+			resourceBundles.put(bundle, resourceBundleCountMin);
+		}
 	}
 
 	@Override
 	public void removeResources(Bundle bundle) {
-		resourceBundles.remove(bundle);
+		if (bundle == null)
+			return;
+		
+		if (resourceBundles.keySet().contains(bundle)) {
+			Integer value = getReferencesCount(bundle);
+			if (value > resourceBundleCountMin) {	
+				resourceBundles.put(bundle, value--); 
+			} else {
+				resourceBundles.remove(bundle);
+			}
+		}
 	}
 
 }
