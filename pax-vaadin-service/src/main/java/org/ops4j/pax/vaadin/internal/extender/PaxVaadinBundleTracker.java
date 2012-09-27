@@ -19,9 +19,7 @@ package org.ops4j.pax.vaadin.internal.extender;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -33,7 +31,6 @@ import org.ops4j.pax.vaadin.internal.servlet.VaadinApplicationServlet;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
-import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.BundleTracker;
@@ -42,11 +39,7 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.Application;
 
-public class PaxVaadinBundleTracker extends BundleTracker {
-
-	public static final String ALIAS = "alias";
-
-	private static final String VAADIN_PATH = "/VAADIN";
+public class PaxVaadinBundleTracker extends BundleTracker  {
 
 	private final Logger logger = LoggerFactory
 			.getLogger(PaxVaadinBundleTracker.class.getName());
@@ -60,7 +53,7 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 	@Override
 	public Object addingBundle(Bundle bundle, BundleEvent event) {
 
-		if (isApplicationBundle(bundle)) {
+		if (Util.isApplicationBundle(bundle)) {
 			logger.debug("found a vaadin-app bundle: {}", bundle);
 			String applicationClass = (String) bundle.getHeaders().get(
 					org.ops4j.pax.vaadin.Constants.VAADIN_APPLICATION);
@@ -99,13 +92,13 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 				e.printStackTrace();
 			}
 
-			final String widgetset = findWidgetset(bundle);
+			final String widgetset = Util.findWidgetset(bundle);
 
 			if (application != null) {
 				VaadinApplicationServlet servlet = new VaadinApplicationServlet(application);
 
 				Map<String, Object> props = new Hashtable<String, Object>();
-				props.put(ALIAS, alias);
+				props.put(org.ops4j.pax.vaadin.Constants.ALIAS, alias);
 
 				if (widgetset != null) {
 					props.put("widgetset", widgetset);
@@ -121,9 +114,9 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 
 		}
 
-		if (isThemeBundle(bundle)) {
+		if (Util.isResourceBundle(bundle)) {
 			logger.debug("found a vaadin-resource bundle: {}", bundle);
-			// TODO do VAADIN Themese handling
+			// TODO do VAADIN Themes handling
 			ServiceReference serviceReference = bundle.getBundleContext()
 					.getServiceReference(VaadinResourceService.class.getName());
 			VaadinResourceService service = (VaadinResourceService) bundle
@@ -134,39 +127,6 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 		return super.addingBundle(bundle, event);
 	}
 
-	protected String findWidgetset(Bundle bundle) {
-		Enumeration widgetEntries = bundle.findEntries("", "*.gwt.xml", true);
-//		Enumeration widgetEntries = bundle.getEntryPaths(VAADIN_PATH);
-		if (widgetEntries == null || !widgetEntries.hasMoreElements())
-			return null;
-
-		/*
-		while (widgetEntries.hasMoreElements()) {
-
-			String path = (String) widgetEntries.nextElement();
-
-			if (path.indexOf("widgetsets") != -1) {
-				Enumeration entryPaths = bundle.getEntryPaths(path);
-				while (entryPaths.hasMoreElements()){
-					path = (String) entryPaths.nextElement();
-					if (path.contains(".")) {
-						if (path.endsWith("/")) {
-							path = path.substring(0, path.length() - 1);
-						}
-						path = path.substring(path.lastIndexOf("/")+1);
-						return path;
-					}
-				}
-			}
-		}
-		*/
-		URL widgetUrl = (URL) widgetEntries.nextElement();
-		String path = widgetUrl.getPath();
-		path = path.substring(1,path.length()-8);
-		path = path.replace("/", ".");
-		return path;
-	}
-
 	@Override
 	public void removedBundle(Bundle bundle, BundleEvent event, Object object) {
 
@@ -175,45 +135,6 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 			registeredServlet.unregister();
 
 		super.removedBundle(bundle, event, object);
-	}
-
-	private boolean isApplicationBundle(Bundle bundle) {
-		if (!isVaadinBundle(bundle))
-			return false;
-
-		String applicationClass = (String) bundle.getHeaders().get(
-				org.ops4j.pax.vaadin.Constants.VAADIN_APPLICATION);
-
-		if (applicationClass != null && !applicationClass.isEmpty())
-			return true;
-
-		return false;
-	}
-
-	private boolean isThemeBundle(Bundle bundle) {
-		if ("com.vaadin".equals(bundle.getSymbolicName()))
-			return false;
-
-		@SuppressWarnings("rawtypes")
-		Enumeration vaadinPaths = bundle.getEntryPaths(VAADIN_PATH);
-		if (vaadinPaths == null || !vaadinPaths.hasMoreElements())
-			return false;
-
-		return true;
-	}
-
-	private boolean isVaadinBundle(Bundle bundle) {
-		String importedPackages = (String) bundle.getHeaders().get(
-				Constants.IMPORT_PACKAGE);
-		if (importedPackages == null) {
-			return false;
-		}
-
-		if (importedPackages.contains("com.vaadin")) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/*
