@@ -11,7 +11,7 @@
 	<artifactId>vaadin</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Pax Vaadin</name>
+	<name>Pax Vaadin :: Project</name>
 	<modules>
 		<module>pax-vaadin-service</module>
 		<module>pax-vaadin-feature</module>

@@ -10,7 +10,7 @@
     <groupId>org.ops4j.pax.vaadin</groupId>
     <artifactId>service</artifactId>
     <packaging>bundle</packaging>
-    <name>Pax Vaadin Service</name>
+    <name>Pax Vaadin :: Service</name>
     <description>Vaadin Extender bootstrapping Vaadin apps</description>
 
 

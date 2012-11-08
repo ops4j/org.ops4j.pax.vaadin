@@ -12,7 +12,7 @@
     <groupId>org.ops4j.pax.vaadin</groupId>
     <artifactId>feature</artifactId>
     <packaging>pom</packaging>
-    <name>feature feature</name>
+    <name>Pax Vaadin :: Features</name>
     <description>Create a feature with the defined dependencies set.</description>
     
     <dependencies>
@@ -24,6 +24,21 @@
         <dependency>
             <groupId>org.ops4j.pax.vaadin.samples</groupId>
             <artifactId>ColorPicker</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.vaadin.samples</groupId>
+            <artifactId>SimpleAddressBook</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.vaadin.samples</groupId>
+            <artifactId>SimpleApplication</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.vaadin.samples</groupId>
+            <artifactId>Sampler</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
