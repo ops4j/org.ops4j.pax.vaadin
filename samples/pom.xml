@@ -16,5 +16,7 @@
         <module>SimpleApplication</module>
         <module>SimpleTheme</module>
         <module>ColorPicker</module>
+        <module>Sampler</module>
+        <module>SimpleAddressBook</module>
     </modules>
 </project>

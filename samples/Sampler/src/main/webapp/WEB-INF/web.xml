@@ -23,7 +23,7 @@
 		</init-param>
 		<init-param>
 			<param-name>widgetset</param-name>
-			<param-value>com.vaadin.demo.sampler.gwt.SamplerWidgetSet</param-value>
+			<param-value>com.vaadin.demo.sampler.gwt.widgetset.SamplerWidgetSet</param-value>
 		</init-param>
 	</servlet>
 
