@@ -1,0 +1,11 @@
+.v-tabsheet-tabitemcell-saved .v-captiontext {
+	color: blue;
+}
+
+.v-tabsheet-tabitemcell-notes .v-captiontext {
+	font-weight: bold;
+}
+
+.v-tabsheet-tabitemcell-issues .v-captiontext {
+	font-size: 18px;
+}

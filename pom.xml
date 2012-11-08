@@ -16,7 +16,8 @@
 		<module>pax-vaadin-service</module>
 		<module>pax-vaadin-feature</module>
 		<module>samples</module>
-	</modules>
+        <module>Sampler</module>
+    </modules>
 
 	<properties>
 		<dependency.osgi.version>4.2.0</dependency.osgi.version>
