@@ -1,4 +1,4 @@
-package com.vaadin.demo.sampler.gwt.client.ui;
+package com.vaadin.demo.sampler.gwt.widgetset.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Widget;

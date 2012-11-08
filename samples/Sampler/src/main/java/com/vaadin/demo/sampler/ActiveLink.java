@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Map;
 
-import com.vaadin.demo.sampler.gwt.client.ui.VActiveLink;
+import com.vaadin.demo.sampler.gwt.widgetset.client.ui.VActiveLink;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.terminal.Resource;

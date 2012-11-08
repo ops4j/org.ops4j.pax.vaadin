@@ -1,6 +1,6 @@
 package com.vaadin.demo.sampler;
 
-import com.vaadin.demo.sampler.gwt.client.ui.VGoogleAnalytics;
+import com.vaadin.demo.sampler.gwt.widgetset.client.ui.VGoogleAnalytics;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponent;
