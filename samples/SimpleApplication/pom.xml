@@ -19,6 +19,18 @@
     </properties>
 
     <build>
+		
+		<!--
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/web.xml</include>
+                </includes>
+            </resource>
+        </resources>
+		-->
+
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
