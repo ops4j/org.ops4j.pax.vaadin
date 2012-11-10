@@ -65,7 +65,8 @@ public class ApplicationServiceTracker extends ServiceTracker  {
         final String widgetset = Util.findWidgetset(bundle);
         
         if (widgetset != null) {
-			props.put("widgetset", widgetset);
+			props.put("init-prefix", "init.");
+			props.put("init.widgetset", widgetset);
 		}
         
         if (Util.isResourceBundle(bundle)) {

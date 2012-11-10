@@ -14,6 +14,26 @@
 		<bundle>mvn:org.ops4j.pax.vaadin.samples/ColorPicker/${project.version}</bundle>
 	</feature>
 
+	<feature name="SimpleAddressBook" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleAddressBook/${project.version}</bundle>
+	</feature>
+
+	<feature name="SimpleApplication" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleApplication/${project.version}</bundle>
+	</feature>
+
+	<feature name="SimpleBlueprintApplication" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleBlueprintApplication/${project.version}</bundle>
+	</feature>
+
+	<feature name="Sampler" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/Sampler/${project.version}</bundle>
+	</feature>
+
 </features>
 
 
