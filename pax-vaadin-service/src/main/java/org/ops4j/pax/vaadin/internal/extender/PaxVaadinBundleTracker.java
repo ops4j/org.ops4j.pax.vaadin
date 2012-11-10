@@ -108,7 +108,8 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 				props.put(ALIAS, alias);
 
 				if (widgetset != null) {
-					props.put("widgetset", widgetset);
+					props.put("init-prefix", "init.");
+					props.put("init.widgetset", widgetset);
 				}
 
 				ServiceRegistration registeredServlet = bundle
@@ -215,27 +216,5 @@ public class PaxVaadinBundleTracker extends BundleTracker {
 
 		return false;
 	}
-
-	/*
-	 * private class VaadinServletConfig implements ServletConfig {
-	 *
-	 * private HttpContext httpContext; private String widgetSets;
-	 *
-	 * public VaadinServletConfig(String widgetSets, HttpContext httpContext) {
-	 * this.widgetSets = widgetSets; this.httpContext = httpContext; }
-	 *
-	 * @Override public String getServletName() { return null; }
-	 *
-	 * @Override public ServletContext getServletContext() { return httpContext;
-	 * }
-	 *
-	 * @Override public Enumeration getInitParameterNames() { // TODO
-	 * Auto-generated method stub Vector<String> initParamNames = new
-	 * Vector<String>(); initParamNames.add("Widgetset"); return
-	 * initParamNames.elements(); }
-	 *
-	 * @Override public String getInitParameter(String name) { if
-	 * ("Widgetset".equalsIgnoreCase(name)) return widgetSets; return null; } }
-	 */
 
 }
