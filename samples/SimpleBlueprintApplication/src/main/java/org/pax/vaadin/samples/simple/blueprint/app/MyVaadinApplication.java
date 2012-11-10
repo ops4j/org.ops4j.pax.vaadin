@@ -15,7 +15,10 @@
  */
 package org.pax.vaadin.samples.simple.blueprint.app;
 
+import java.util.Date;
+
 import com.vaadin.Application;
+import com.vaadin.terminal.Terminal;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
@@ -30,18 +33,55 @@ public class MyVaadinApplication extends Application
     private Window window;
     
     @Override
-    public void init()
-    {
+    public void init() {
         window = new Window("My Vaadin Application");
         setMainWindow(window);
-        Button button = new Button("Click Me");
-        button.addListener(new Button.ClickListener() {
+
+        // Click & Fails Me buttons
+        Button clickButton = new Button("Click Me");
+        Button failsButton = new Button ("Fail Me");
+
+        // Notification displayed when click button is called
+        final Window.Notification notif = new Window.Notification(
+                "The time is " + new Date(),
+                Window.Notification.TYPE_WARNING_MESSAGE);
+        // Notification position.
+        notif.setPosition(Window.Notification.POSITION_CENTERED_BOTTOM);
+
+        // Add a listener on Click button
+        clickButton.addListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-                window.addComponent(new Label("Thank you for clicking"));
+               window.addComponent(new Label("Thank you for clicking"));
+               window.showNotification(notif);
             }
         });
-        window.addComponent(button);
+
+        // Add a listener for Fails button
+        failsButton.addListener(new Button.ClickListener() {
+            public void buttonClick(ClickEvent event) {
+                // Throw some exception.
+                throw new RuntimeException("You can't catch this.");
+            }
+        });
+
+        window.addComponent(clickButton);
+        window.addComponent(failsButton);
         
+    }
+
+    @Override
+    public void terminalError(Terminal.ErrorEvent event) {
+
+        // Call the default implementation.
+        super.terminalError(event);
+
+        // Some custom behaviour.
+        if (getMainWindow() != null) {
+            getMainWindow().showNotification(
+                    "An unchecked exception occured!",
+                    event.getThrowable().toString(),
+                    Window.Notification.TYPE_ERROR_MESSAGE);
+        }
     }
     
 }

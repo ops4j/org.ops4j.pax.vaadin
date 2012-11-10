@@ -12,21 +12,8 @@
 	<groupId>org.ops4j.pax.vaadin</groupId>
 	<artifactId>feature</artifactId>
 	<packaging>pom</packaging>
-	<name>feature feature</name>
-	<description>Create a feature with the defined dependencies set.</description>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.ops4j.pax.vaadin</groupId>
-			<artifactId>service</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.vaadin.samples</groupId>
-			<artifactId>ColorPicker</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+    <name>Pax Vaadin :: Features</name>
+	<description>Create a feature</description>
 
 	<build>
 		<resources>
@@ -76,25 +63,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!--plugin>
-				<groupId>org.apache.karaf.tooling</groupId>
-				<artifactId>features-maven-plugin</artifactId>
-				<version>2.2.7</version>
-				<executions>
-					<execution>
-						<id>generate-features-file</id>
-						<goals>
-							<goal>generate-features-file</goal>
-						</goals>
-						<configuration>
-							<karafVersion>2.2.7</karafVersion>
-							<addTransitiveFeatures>true</addTransitiveFeatures>
-							<includeDependencies>true</includeDependencies>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin-->
 		</plugins>
 	</build>
 

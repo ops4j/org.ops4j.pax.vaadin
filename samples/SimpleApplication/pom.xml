@@ -10,7 +10,7 @@
     <groupId>org.ops4j.pax.vaadin.samples</groupId>
     <artifactId>SimpleApplication</artifactId>
     <packaging>bundle</packaging>
-    <name>PAx for Vaadin sample application - Simple Application</name>
+    <name>Pax for Vaadin sample application - Simple Application</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +19,18 @@
     </properties>
 
     <build>
+		
+		<!--
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/web.xml</include>
+                </includes>
+            </resource>
+        </resources>
+		-->
+
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>

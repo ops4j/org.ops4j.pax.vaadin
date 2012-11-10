@@ -16,7 +16,7 @@
         </init-param>
         <init-param>
             <param-name>widgetset</param-name>
-            <param-value>org.ops4j.pax.vaadin.samples.gwt.ColorPickerWidgetSet</param-value>
+            <param-value>org.ops4j.pax.vaadin.samples.widgetset.ColorPickerWidgetSet</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

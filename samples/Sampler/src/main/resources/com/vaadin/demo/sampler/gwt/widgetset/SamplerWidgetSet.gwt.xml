@@ -1,0 +1,14 @@
+<module>
+	<!-- WS Compiler: manually edited  -->
+
+	<!-- Inherit the DefaultWidgetSet -->
+	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" /> 
+	
+	<!-- Tracker -->
+	<script src="http://www.google-analytics.com/ga.js" />
+	
+	<!-- Prettify  -->
+	<stylesheet src="prettify/prettify.css"/>
+	<script src="prettify/prettify.js" />
+
+</module>
