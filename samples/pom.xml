@@ -14,6 +14,7 @@
     <name>Samples Project</name>
     <modules>
         <module>SimpleApplication</module>
+        <module>SimpleBlueprintApplication</module>
         <module>SimpleTheme</module>
         <module>ColorPicker</module>
         <module>Sampler</module>
