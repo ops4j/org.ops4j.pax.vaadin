@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>vaadin</artifactId>
-        <groupId>org.ops4j.pax</groupId>
-        <version>0.1.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<artifactId>vaadin</artifactId>
+		<groupId>org.ops4j.pax</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
 
-    <groupId>org.ops4j.pax.vaadin</groupId>
-    <artifactId>feature</artifactId>
-    <packaging>pom</packaging>
+	<groupId>org.ops4j.pax.vaadin</groupId>
+	<artifactId>feature</artifactId>
+	<packaging>pom</packaging>
     <name>Pax Vaadin :: Features</name>
-    <description>Create a feature with the defined dependencies set.</description>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.ops4j.pax.vaadin</groupId>
-            <artifactId>service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.vaadin.samples</groupId>
-            <artifactId>ColorPicker</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.vaadin.samples</groupId>
-            <artifactId>SimpleAddressBook</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.vaadin.samples</groupId>
-            <artifactId>SimpleApplication</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.vaadin.samples</groupId>
-            <artifactId>Sampler</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+	<description>Create a feature</description>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>features-maven-plugin</artifactId>
-                <version>2.2.7</version>
-                <executions>
-                    <execution>
-                        <id>generate-features-file</id>
-                        <goals>
-                            <goal>generate-features-file</goal>
-                        </goals>
-                        <configuration>
-                            <karafVersion>2.2.7</karafVersion>
-                            <addTransitiveFeatures>true</addTransitiveFeatures>
-                            <includeDependencies>true</includeDependencies>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>filter</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-artifact</id>
+						<phase>package</phase>
+						<inherited>false</inherited>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${project.build.outputDirectory}/features.xml</file>
+									<type>xml</type>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

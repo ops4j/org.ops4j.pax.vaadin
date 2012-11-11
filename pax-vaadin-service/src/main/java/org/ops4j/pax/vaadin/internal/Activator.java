@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.ops4j.pax.vaadin.VaadinResourceService;
 import org.ops4j.pax.vaadin.internal.extender.ApplicationFactoryServiceTracker;
+import org.ops4j.pax.vaadin.internal.extender.ApplicationServiceTracker;
 import org.ops4j.pax.vaadin.internal.extender.PaxVaadinBundleTracker;
 import org.ops4j.pax.vaadin.internal.servlet.VaadinResourceServlet;
 import org.osgi.framework.Bundle;
@@ -41,17 +42,20 @@ public class Activator implements BundleActivator {
 	private BundleContext bundleContext;
 	private PaxVaadinBundleTracker bundleTracker;
 	private ServiceRegistration resourceService;
-    private ApplicationFactoryServiceTracker serviceTracker;
+    private ApplicationServiceTracker applicationServiceTracker;
+    private ApplicationFactoryServiceTracker applicationFactoryServiceTracker;
 
 	public void start(BundleContext context) throws Exception {
 		bundleContext = context;
 		createAndRegisterVaadinResourceServlet();
 
 		bundleTracker = new PaxVaadinBundleTracker(bundleContext);
-		serviceTracker = new ApplicationFactoryServiceTracker(bundleContext);
+		applicationServiceTracker = new ApplicationServiceTracker(bundleContext);
+		applicationFactoryServiceTracker = new ApplicationFactoryServiceTracker(bundleContext);
 
 		bundleTracker.open();
-		serviceTracker.open();
+		applicationServiceTracker.open();
+		applicationFactoryServiceTracker.open();
 
 	}
 
@@ -59,8 +63,11 @@ public class Activator implements BundleActivator {
 		if (bundleTracker != null)
 			bundleTracker.close();
 		
-		if (serviceTracker != null)
-		    serviceTracker.close();
+		if (applicationServiceTracker != null)
+			applicationServiceTracker.close();
+		
+		if (applicationFactoryServiceTracker != null)
+		    applicationFactoryServiceTracker.close();
 
 		if (resourceService != null)
 			resourceService.unregister();
@@ -78,11 +85,11 @@ public class Activator implements BundleActivator {
 		Dictionary<String, String> props;
 
         props = new Hashtable<String, String>();
-        props.put("alias", VaadinResourceServlet._VAADIN);
+        props.put(org.ops4j.pax.vaadin.Constants.ALIAS, org.ops4j.pax.vaadin.Constants.VAADIN_PATH);
 
         HttpServlet vaadinResourceServlet = new VaadinResourceServlet(vaadin);
 
-		resourceService = bundleContext.registerService( Servlet.class.getName(), vaadinResourceServlet, props );
+		resourceService = bundleContext.registerService( new String[] {VaadinResourceService.class.getName(), Servlet.class.getName()}, vaadinResourceServlet, props );
 
 		bundleContext.registerService(VaadinResourceService.class.getName(), vaadinResourceServlet, null);
 	}

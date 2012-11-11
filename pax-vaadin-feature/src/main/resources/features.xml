@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="Pax Vaadin" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<feature name="service" version="${project.version}">
+		<feature>http</feature>
+		<feature>http-whiteboard</feature>
+		
+		<bundle>mvn:org.ops4j.pax.vaadin/service/${project.version}</bundle>
+	</feature>
+
+	<feature name="ColorPicker" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/ColorPicker/${project.version}</bundle>
+	</feature>
+
+	<feature name="SimpleAddressBook" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleAddressBook/${project.version}</bundle>
+	</feature>
+
+	<feature name="SimpleApplication" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleApplication/${project.version}</bundle>
+	</feature>
+
+	<feature name="SimpleBlueprintApplication" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/SimpleBlueprintApplication/${project.version}</bundle>
+	</feature>
+
+	<feature name="Sampler" version="${project.version}">
+		<bundle>mvn:com.vaadin/vaadin/${dependency.vaadin.version}</bundle>
+		<bundle>mvn:org.ops4j.pax.vaadin.samples/Sampler/${project.version}</bundle>
+	</feature>
+
+</features>
+
+
