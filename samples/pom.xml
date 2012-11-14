@@ -19,6 +19,6 @@
         <module>ColorPicker</module>
         <module>Sampler</module>
         <module>SimpleAddressBook</module>
-        <module>FullApplication</module>
+        <module>ComplexApplication</module>
     </modules>
 </project>

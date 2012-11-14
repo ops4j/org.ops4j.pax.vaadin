@@ -30,6 +30,7 @@
                         <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
                         <Vaadin-Application>org.ops4j.pax.vaadin.samples.complex.app.MyComplexVaadinApplication</Vaadin-Application>
                         <Vaadin-Alias>/${project.artifactId}</Vaadin-Alias>
+                        <Bundle-ClassPath>.,WEB-INF/lib/PagedTable-0.6.3.jar</Bundle-ClassPath>
                     </instructions>
                 </configuration>
             </plugin>
@@ -41,6 +42,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.vaadin.addons</groupId>
+            <artifactId>pagedtable</artifactId>
+            <version>0.6.3</version>
+        </dependency>
     </dependencies>
+
+
 
 </project>

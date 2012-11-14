@@ -16,10 +16,12 @@
 
 package org.ops4j.pax.vaadin.samples.complex.app;
 
+import com.jensjansson.pagedtable.PagedTable;
 import com.vaadin.Application;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
@@ -38,7 +40,8 @@ public class MyComplexVaadinApplication extends Application {
     @Override
     public void init() {
 
-        setTheme("table");
+        // TODO CHECK WHY THEME RENDERING IS TOO SLOW
+        // setTheme("table");
 
         window = new Window("My Complex Vaadin Application");
         setMainWindow(window);
@@ -111,6 +114,23 @@ public class MyComplexVaadinApplication extends Application {
 
         layout.addComponent(table);
         window.addComponent(layout);
+
+        IndexedContainer container = new IndexedContainer();
+        container.addContainerProperty("foo", String.class, null);
+        container.addContainerProperty("bar", String.class, null);
+        container.addContainerProperty("baz", String.class, null);
+        for (int i = 0; i < 100; i++) {
+            Item item = container.addItem(i);
+            item.getItemProperty("foo").setValue("foo " + i);
+            item.getItemProperty("bar").setValue("bar");
+            item.getItemProperty("baz").setValue("baz");
+        }
+        PagedTable pagedTable = new PagedTable("footable");
+        pagedTable.setContainerDataSource(container);
+        pagedTable.setPageLength(15);
+        window.addComponent(pagedTable);
+        window.addComponent(pagedTable.createControls());
+        setMainWindow(window);
 
     }
 }
