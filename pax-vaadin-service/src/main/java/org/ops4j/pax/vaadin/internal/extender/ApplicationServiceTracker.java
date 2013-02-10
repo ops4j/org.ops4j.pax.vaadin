@@ -49,7 +49,7 @@ public class ApplicationServiceTracker extends ServiceTracker  {
 	@Override
 	public Object addingService(ServiceReference reference) {
         Application application = (Application) super.addingService(reference);
-        Servlet servlet = new VaadinApplicationServlet(application);
+        Servlet servlet = new VaadinApplicationServlet(application.getClass());
         Dictionary props = new Properties();
         
         for(String key : reference.getPropertyKeys()) {

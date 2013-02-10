@@ -38,9 +38,9 @@ public class VaadinApplicationServlet extends HttpServlet {
 	private ClassLoader classLoader;
 	private Servlet servlet;
 
-	public VaadinApplicationServlet(Application application) {
-		classLoader = application.getClass().getClassLoader();
-		servlet = new AppServlet(application);
+	public VaadinApplicationServlet(Class<? extends Application> appClazz) {
+		classLoader = appClazz.getClassLoader();
+		servlet = new AppServlet(appClazz);
 	}
 
 	@Override
@@ -105,20 +105,32 @@ public class VaadinApplicationServlet extends HttpServlet {
 
 	private class AppServlet extends AbstractApplicationServlet {
 
-		private final Application application;
+		private final Class<? extends Application> appClazz;
 
-		public AppServlet(Application application) {
-			this.application = application;
+		public AppServlet(Class<? extends Application> applClazz) {
+			this.appClazz = applClazz;
 		}
 
 		@Override
 		protected Application getNewApplication(HttpServletRequest request) throws ServletException {
-			return application;
+			
+			Application newApplication = null;
+			try {
+				newApplication = appClazz.newInstance();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return newApplication;
 		}
 
 		@Override
 		protected Class<? extends Application> getApplicationClass() throws ClassNotFoundException {
-			return application.getClass();
+			return appClazz;
 		}
 
 	}

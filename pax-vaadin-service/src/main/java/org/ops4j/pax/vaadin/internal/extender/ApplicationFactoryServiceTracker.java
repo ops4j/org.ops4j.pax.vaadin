@@ -59,13 +59,15 @@ public class ApplicationFactoryServiceTracker extends ServiceTracker {
     public void removedService(ServiceReference reference, Object service) {
         
         ApplicationFactory factory = (ApplicationFactory) context.getService(reference);
-        m_serviceRegistration.remove(factory);
+        final ServiceRegistration servletRegistration = m_serviceRegistration.remove(factory);
+        if (servletRegistration != null) {
+            servletRegistration.unregister();
+        }
         
         super.removedService(reference, service);
     }
     
     private class FactoryServlet extends AbstractApplicationServlet{
-        
 		private static final long serialVersionUID = 1L;
 		
 		private ApplicationFactory m_factory;

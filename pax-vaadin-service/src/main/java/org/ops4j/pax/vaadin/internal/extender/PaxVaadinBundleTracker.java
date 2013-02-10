@@ -58,44 +58,18 @@ public class PaxVaadinBundleTracker extends BundleTracker  {
 			String applicationClass = (String) bundle.getHeaders().get(
 					org.ops4j.pax.vaadin.Constants.VAADIN_APPLICATION);
 			String alias = (String) bundle.getHeaders().get("Vaadin-Alias");
-			Application application = null;
+			Class <? extends Application> appClazz = null;
 			try {
-				Class appClazz = bundle.loadClass(applicationClass);
-
-				Constructor[] ctors = appClazz.getDeclaredConstructors();
-				Constructor ctor = null;
-				for (int i = 0; i < ctors.length; i++) {
-					ctor = ctors[i];
-					if (ctor.getGenericParameterTypes().length == 0)
-						break;
-				}
-				ctor.setAccessible(true);
-				application = (Application) ctor.newInstance();
-
+				appClazz = bundle.loadClass(applicationClass);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			final String widgetset = Util.findWidgetset(bundle);
 
-			if (application != null) {
-				VaadinApplicationServlet servlet = new VaadinApplicationServlet(application);
+			if (appClazz != null) {
+				VaadinApplicationServlet servlet = new VaadinApplicationServlet(appClazz);
 
 				Map<String, Object> props = new Hashtable<String, Object>();
 				props.put(org.ops4j.pax.vaadin.Constants.ALIAS, alias);
